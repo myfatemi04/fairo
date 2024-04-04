@@ -10,7 +10,6 @@ import threading
 import atexit
 import logging
 from omegaconf import DictConfig
-import hydra
 
 import grpc  # This requires `conda install grpcio protobuf`
 import torch
@@ -99,6 +98,7 @@ class BaseRobotInterface:
 
         self.use_mirror_sim = use_mirror_sim
         if use_mirror_sim:
+            import hydra
             self.mirror_sim_client = hydra.utils.instantiate(mirror_cfg.robot_client)
             self.mirror_ip = mirror_ip
             self.mirror_port = mirror_port

@@ -5,12 +5,12 @@
 cmake_minimum_required(VERSION 3.14)
 project(polymetis)
 
-set(CMAKE_CXX_FLAGS "-std=c++14")
+set(CMAKE_CXX_FLAGS "-std=c++17")
 set(CMAKE_CXX_FLAGS_RELEASE "-O3")
 
 add_library(protobuf::libprotobuf UNKNOWN IMPORTED)
-set_target_properties(protobuf::libprotobuf PROPERTIES
-  INTERFACE_INCLUDE_DIRECTORIES "$ENV{CONDA_PREFIX}/include/google/protobuf/")
+# set_target_properties(protobuf::libprotobuf PROPERTIES
+#   INTERFACE_INCLUDE_DIRECTORIES "$ENV{CONDA_PREFIX}/include/google/protobuf/")
 set_target_properties(protobuf::libprotobuf PROPERTIES
   IMPORTED_LOCATION "$ENV{CONDA_PREFIX}/lib/libprotobuf.so")
 set_property(TARGET protobuf::libprotobuf APPEND PROPERTY
@@ -33,7 +33,6 @@ find_package(yaml-cpp REQUIRED)
 
 ### eigen3
 find_package(Eigen3 REQUIRED)
-
 
 # Find protoc
 set(_PROTOBUF_PROTOC $ENV{CONDA_PREFIX}/bin/protoc)

@@ -12,7 +12,7 @@ try:
     torch.classes.load_library(
         f"{os.environ['CONDA_PREFIX']}/lib/libtorchscript_pinocchio.so"
     )
-except OSError:
+except (OSError, KeyError):
     lib_path = os.path.abspath(
         os.path.join(
             PKG_ROOT_DIR,
