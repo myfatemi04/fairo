@@ -124,13 +124,14 @@ add_executable(run_server "src/run_server.cpp")
 target_link_libraries(run_server polymetis_server)
 
 # Add test client
-add_executable(empty_statistics_client "src/clients/empty_statistics_client.cpp"
-)
-target_link_libraries(empty_statistics_client
-    generated_grpc_protos
-    yaml-cpp
-    spdlog::spdlog
-)
+# Avoid building unnecessary dependencies.
+# add_executable(empty_statistics_client "src/clients/empty_statistics_client.cpp"
+# )
+# target_link_libraries(empty_statistics_client
+#     generated_grpc_protos
+#     yaml-cpp
+#     spdlog::spdlog
+# )
 
 if(BUILD_ALLEGRO)
   add_library(allegro_hand
@@ -153,10 +154,10 @@ if(BUILD_ALLEGRO)
     )
 
   if(BUILD_TESTS)
-    find_package(Git REQUIRED QUIET)
-    execute_process(COMMAND ${GIT_EXECUTABLE} submodule update --init --recursive -- tests/cpp/fake_clock
-      WORKING_DIRECTORY ${PROJECT_SOURCE_DIR}
-      COMMAND_ERROR_IS_FATAL ANY)
+    # find_package(Git REQUIRED QUIET)
+    # execute_process(COMMAND ${GIT_EXECUTABLE} submodule update --init --recursive -- tests/cpp/fake_clock
+    #   WORKING_DIRECTORY ${PROJECT_SOURCE_DIR}
+    #   COMMAND_ERROR_IS_FATAL ANY)
 
     add_library(fake_clock tests/cpp/fake_clock/fake_clock.cc)
     add_executable(test_allegro_hand_client

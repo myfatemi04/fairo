@@ -7,6 +7,7 @@ project(torch_isolation)
 
 add_subdirectory("pinocchio_isolation/")
 
+# Make sure this matches PyTorch!
 add_definitions(-D_GLIBCXX_USE_CXX11_ABI=0)
 
 # Find Torch
@@ -14,6 +15,7 @@ execute_process (
     COMMAND bash -c "python -c 'from distutils.sysconfig import get_python_lib; print(get_python_lib())' | tr -d '\n'"
     OUTPUT_VARIABLE site_packages_path
 )
+message("site_packages_path: ${site_packages_path}")
 set(Torch_DIR "${site_packages_path}/torch/share/cmake/Torch/")
 find_package(Torch REQUIRED)
 
